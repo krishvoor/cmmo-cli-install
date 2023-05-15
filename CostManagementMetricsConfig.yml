@@ -6,7 +6,7 @@ metadata:
 spec:
   upload:
     ingress_path: /api/ingress/v1/upload
-    upload_cycle: 30
+    upload_cycle: 60
     upload_toggle: true
     validate_cert: true
   packaging:

@@ -19,7 +19,7 @@ $
 
 ### Creating a secret for respective user
 This section assumes you have account & relevant access in
-https://cloud.redhat.com/ 
+https://console.redhat.com/
 
 ```
 $ 
