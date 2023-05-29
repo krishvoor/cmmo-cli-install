@@ -27,4 +27,4 @@ spec:
     check_cycle: 1440
     create_source: true
     sources_path: /api/sources/v1.0/
-    name: <UPDATE_SOURCE_NAME>
+    name: UPDATE_SOURCE_NAME
