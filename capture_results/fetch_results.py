@@ -28,7 +28,7 @@ parser.add_argument('--password',
 
 parser.add_argument('--url',
                     help='Provide the required console-dot URL',
-                    default="https://console.redhat.com/")
+                    default="https://console.redhat.com/api/cost-management/v1/recommendations/openshift")
 
 # Assign them as attributes
 args = parser.parse_args()
@@ -56,6 +56,13 @@ queries = [
             'project': f'{namespace}',
             'workload': 'kube-apiserver',
             'container': 'kube-apiserver'
+        }
+    },
+    {
+        'query_name': 'northd',
+        'params':{
+            'project': f'{namespace}',
+            'container': 'northd'
         }
     }
 ]
