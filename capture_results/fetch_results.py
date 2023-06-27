@@ -3,6 +3,7 @@ import csv
 import urllib3
 import argparse
 from datetime import datetime
+from elasticsearch import Elasticsearch
 
 # Disable Warnings while interacting with https
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
@@ -39,6 +40,33 @@ workload_name = f'{args.workload_name}'
 username = f'{args.username}' 
 password = f'{args.password}'
 login_url = f'{args.url}'
+
+def index_metadata(uuid):
+    # Connect to the Elasticsearch server with authentication
+    es = Elasticsearch(
+        hosts='https://search-perfscale-pro-wxrjvmobqs7gsyi3xvxkqmn7am.us-west-2.es.amazonaws.com:443',
+        http_auth=('admin', 'nKNQ9=vw_bwaSy1')
+    )
+    # Define the index name
+    index = 'hypershift-wrapper-timers'
+
+    # Path to the CSV file
+    csv_file_path = 'path/to/your/csv/file.csv'
+    
+    # Index UUID with kube-burner
+
+    # Read the CSV file
+    with open(csv_file_path, 'r') as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            # Push each row as a document to the Elasticsearch server
+            response = es.index(index=index, body=row)
+
+            # Check the response
+            if response['result'] == 'created':
+                print('Data pushed successfully.')
+            else:
+                print('Failed to push data:', response)
 
 auth = requests.auth.HTTPBasicAuth(username, password)
 
